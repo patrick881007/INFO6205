@@ -51,11 +51,20 @@ public class InsertionSortComparator<X> extends SortWithHelper<X> {
      * @param from the index of the first element to sort
      * @param to   the index of the first element not to sort
      */
+    @Override
     public void sort(X[] xs, int from, int to) {
-        final Helper<X> helper = getHelper();
+        Helper<X> helper = getHelper();
+        for (int i = from + 1; i < to; i++) {
+            X key = xs[i];
+            int j = i - 1;
+            while (j >= from && helper.less(key, xs[j])) {
+                helper.swap(xs, j, j + 1);
+                j--;
+            }
+        }
+        
 
         // TO BE IMPLEMENTED 
-throw new RuntimeException("implementation missing");
     }
 
     public static final String DESCRIPTION = "Insertion sort";
